@@ -1,3 +1,4 @@
 {
-    "mongoURI" : "mongodb+srv://ruchir123:<Password>@devconnectorwebapp.udkb2.mongodb.net/DevConnector?retryWrites=true&w=majority"
+    "mongoURI" : "************************",
+    "jwtSecret" : "somelongString"
 }
