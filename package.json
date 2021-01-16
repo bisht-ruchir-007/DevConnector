@@ -4,8 +4,8 @@
   "description": "MERN Project for connecting Developers all over the world",
   "main": "index.js",
   "scripts": {
-    "start": "node server",
-    "server" : "nodemon server"
+    "start": "node server.js",
+    "server" : "nodemon server.js"
   },
   "repository": {
     "type": "git",
