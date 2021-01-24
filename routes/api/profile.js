@@ -208,6 +208,7 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
 		profile.experience.splice(removeIndex, 1);
 
 		await profile.save();
+
 		res.json(profile);
 	} catch (err) {
 		console.log(err.message);
