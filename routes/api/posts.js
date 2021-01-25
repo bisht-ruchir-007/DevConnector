@@ -110,13 +110,14 @@ router.put('/like/:id', auth, async (req, res) => {
 			return res.status(404).json({ msg: 'Post not found' });
 		}
 
+		// user can't like his post
+		if (post.user.toString() === req.user.id) {
+			return res.status(401).json({ msg: "You can't like your own post." });
+		}
+
 		//check if post has already been liked by current user
 		if (post.likes.filter((like) => like.user.toString() === req.user.id).length > 0) {
 			return res.status(400).json({ msg: 'Post already liked.' });
-		}
-
-		if (post.user.toString() === req.user.id) {
-			return res.status(401).json({ msg: "You can't like your own post." });
 		}
 
 		post.likes.unshift({ user: req.user.id });
@@ -132,4 +133,40 @@ router.put('/like/:id', auth, async (req, res) => {
 		res.status(500).send('Server error');
 	}
 });
+
+// @route       PUT api/post/unlike/:id
+// @description unlike post by ID
+// @access      Private
+router.put('/unlike/:id', auth, async (req, res) => {
+	try {
+		const post = await Post.findById(req.params.id);
+		if (!post) {
+			return res.status(404).json({ msg: 'Post not found' });
+		}
+
+		// user can't unlike his/her post
+		if (post.user.toString() === req.user.id) {
+			return res.status(401).json({ msg: "You can't unlike your own post." });
+		}
+
+		//check if post has already been liked by current user
+		if (post.likes.filter((like) => like.user.toString() === req.user.id).length === 0) {
+			return res.status(400).json({ msg: 'Post has not yet been liked.' });
+		}
+
+		// get the remove index
+		const removeIndex = post.likes.map((like) => like.user.toString()).indexOf(req.user.id);
+		post.likes.splice(removeIndex, 1);
+		await post.save();
+
+		res.json(post.likes);
+	} catch (err) {
+		console.log(err.message);
+		if (err.kind === 'ObjectId') {
+			return res.status(404).json({ msg: 'Post not found' });
+		}
+		res.status(500).send('Server error');
+	}
+});
+
 module.exports = router;
