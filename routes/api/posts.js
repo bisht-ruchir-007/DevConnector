@@ -8,7 +8,7 @@ const Post = require('../../models/Post');
 // const request = require('request');
 // const config = require('config');
 
-// @route       POST api/post
+// @route       POST api/posts
 // @description Create a post
 // @access      Private
 router.post('/', [ auth, [ check('text', 'Please enter a comment').not().isEmpty() ] ], async (req, res) => {
@@ -36,7 +36,7 @@ router.post('/', [ auth, [ check('text', 'Please enter a comment').not().isEmpty
 	}
 });
 
-// @route       GET api/post
+// @route       GET api/posts
 // @description Get all posts
 // @access      Private
 router.get('/', auth, async (req, res) => {
@@ -50,7 +50,7 @@ router.get('/', auth, async (req, res) => {
 	}
 });
 
-// @route       GET api/post/:id
+// @route       GET api/posts/:id
 // @description Get post by ID
 // @access      Private
 router.get('/:id', auth, async (req, res) => {
@@ -71,7 +71,7 @@ router.get('/:id', auth, async (req, res) => {
 	}
 });
 
-// @route       DELETE api/post/:id
+// @route       DELETE api/posts/:id
 // @description Delete post by ID
 // @access      Private
 router.delete('/:id', auth, async (req, res) => {
@@ -134,7 +134,7 @@ router.put('/like/:id', auth, async (req, res) => {
 	}
 });
 
-// @route       PUT api/post/unlike/:id
+// @route       PUT api/posts/unlike/:id
 // @description unlike post by ID
 // @access      Private
 router.put('/unlike/:id', auth, async (req, res) => {
@@ -165,6 +165,37 @@ router.put('/unlike/:id', auth, async (req, res) => {
 		if (err.kind === 'ObjectId') {
 			return res.status(404).json({ msg: 'Post not found' });
 		}
+		res.status(500).send('Server error');
+	}
+});
+
+// @route       POST api/posts/comment/:id
+// @description Comment on a Post
+// @access      Private
+router.post('/comment/:id', [ auth, [ check('text', 'Please enter a comment').not().isEmpty() ] ], async (req, res) => {
+	try {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(400).json({ errors: errors.array() });
+		}
+
+		const user = await User.findById(req.user.id).select('-password');
+
+		const post = await Post.findById(req.params.id);
+		const newComment = {
+			text: req.body.text,
+			name: user.name,
+			avatar: user.avatar,
+			user: req.user.id
+		};
+
+		post.comments.unshift(newComment);
+
+		await post.save();
+
+		res.json(post.comments);
+	} catch (err) {
+		console.log(err.message);
 		res.status(500).send('Server error');
 	}
 });
