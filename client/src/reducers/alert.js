@@ -6,7 +6,13 @@ export default function(state = initialState, action) {
 
 	switch (type) {
 		case SET_ALERT:
-			return [ ...state, payload ];
+			const temp = state.filter((alert) => alert.msg === payload.msg);
+			if (temp.length === 0) {
+				return [ ...state, payload ];
+			} else {
+				return [ ...state ];
+			}
+
 		case REMOVE_ALERT:
 			return state.filter((alert) => alert.id !== payload);
 		default:
