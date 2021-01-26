@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-
+import { Link } from 'react-router-dom';
 const Register = () => {
 	const [ formData, setformData ] = useState({
 		name: '',
@@ -12,13 +12,13 @@ const Register = () => {
 
 	const onChange = (e) => setformData({ ...formData, [e.target.name]: e.target.value });
 
-	const onSubmit = (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault();
 		// check if password match
 		if (password !== password2) {
 			console.log('Password mismatch...');
 		} else {
-			console.log(formData);
+			console.log('Success');
 		}
 	};
 	return (
@@ -76,10 +76,31 @@ const Register = () => {
 				<input type='submit' className='btn btn-primary' value='Register' />
 			</form>
 			<p className='my-1'>
-				Already have an account? <a href='login.html'>Login</a>
+				Already have an account? <Link to='/login'>Login</Link>
 			</p>
 		</Fragment>
 	);
 };
 
 export default Register;
+
+// const newUser = {
+//     name,
+//     email,
+//     password,
+//     password2
+// };
+
+// try {
+//     const config = {
+//         headers: {
+//             'Content-Type': 'application/json'
+//         }
+//     };
+
+//     const body = JSON.stringify(newUser);
+//     const res = await axios.post('/api/users', body, config);
+//     console.log(res.data);
+// } catch (err) {
+//     console.log(err.response.data);
+// }
