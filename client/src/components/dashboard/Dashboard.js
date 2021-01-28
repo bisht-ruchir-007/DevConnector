@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import DashboardActions from '../dashboard/DashboardActions';
+import Experience from './Experience';
+import Education from './Education';
 
 import { getCurrentUserProfile } from '../../actions/profile';
 
@@ -25,7 +27,8 @@ const Dashboard = ({ getCurrentUserProfile, auth: { user }, profile: { profile, 
 				<Fragment>
 					<h2 className='my-2'>Education Credentials</h2>
 					<DashboardActions />
-
+					<Experience experience={profile.experience} />
+					<Education education={profile.education} />
 					<div className='my-2'>
 						<button className='btn btn-danger'>
 							<i className='fas fa-user-minus' />
