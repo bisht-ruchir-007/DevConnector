@@ -2,8 +2,10 @@ import React, { useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCurrentUserProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
+import DashboardActions from '../dashboard/DashboardActions';
+
+import { getCurrentUserProfile } from '../../actions/profile';
 
 const Dashboard = ({ getCurrentUserProfile, auth: { user }, profile: { profile, loading } }) => {
 	useEffect(() => {
@@ -21,69 +23,8 @@ const Dashboard = ({ getCurrentUserProfile, auth: { user }, profile: { profile, 
 
 			{profile != null ? (
 				<Fragment>
-					<div className='dash-buttons'>
-						<a href='edit-profile.html' className='btn btn-light'>
-							<i className='fas fa-user-circle text-primary' /> Edit Profile
-						</a>
-						<a href='add-experience.html' className='btn btn-light'>
-							<i className='fab fa-black-tie text-primary' /> Add Experience
-						</a>
-						<a href='add-education.html' className='btn btn-light'>
-							<i className='fas fa-graduation-cap text-primary' /> Add Education
-						</a>
-					</div>
-
-					<h2 className='my-2'>Experience Credentials</h2>
-					<table className='table'>
-						<thead>
-							<tr>
-								<th>Company</th>
-								<th className='hide-sm'>Title</th>
-								<th className='hide-sm'>Years</th>
-								<th />
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Tech Guy Web Solutions</td>
-								<td className='hide-sm'>Senior Developer</td>
-								<td className='hide-sm'>02-03-2009 - 01-02-2014</td>
-								<td>
-									<button className='btn btn-danger'>Delete</button>
-								</td>
-							</tr>
-							<tr>
-								<td>Traversy Media</td>
-								<td className='hide-sm'>Instructor & Developer</td>
-								<td className='hide-sm'>02-03-2015 - Now</td>
-								<td>
-									<button className='btn btn-danger'>Delete</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-
 					<h2 className='my-2'>Education Credentials</h2>
-					<table className='table'>
-						<thead>
-							<tr>
-								<th>School</th>
-								<th className='hide-sm'>Degree</th>
-								<th className='hide-sm'>Years</th>
-								<th />
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Northern Essex</td>
-								<td className='hide-sm'>Associates</td>
-								<td className='hide-sm'>02-03-2007 - 01-02-2009</td>
-								<td>
-									<button className='btn btn-danger'>Delete</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+					<DashboardActions />
 
 					<div className='my-2'>
 						<button className='btn btn-danger'>
