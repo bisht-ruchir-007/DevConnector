@@ -43,9 +43,12 @@ const Education = ({ education, deleteEducation }) => {
 		);
 	} else {
 		return (
-			<h3>
-				Its Empty , Please <Link to='/add-education'>add</Link> your education details.
-			</h3>
+			<Fragment>
+				<h2 className='my-2'>Education Credentials</h2>
+				<h3>
+					Its Empty , Please <Link to='/add-education'>add</Link> your education details.
+				</h3>
+			</Fragment>
 		);
 	}
 };

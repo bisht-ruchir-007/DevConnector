@@ -42,7 +42,7 @@ const Experience = ({ experience, deleteExperience }) => {
 	} else {
 		return (
 			<Fragment>
-				<h2 className='my-2'>Education Credentials</h2>
+				<h2 className='my-2'>Experience Credentials</h2>
 				<h3>
 					Its Empty , Please <Link to='/add-education'>add</Link> your experience details.
 				</h3>

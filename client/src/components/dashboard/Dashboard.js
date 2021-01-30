@@ -7,9 +7,9 @@ import DashboardActions from '../dashboard/DashboardActions';
 import Experience from './Experience';
 import Education from './Education';
 
-import { getCurrentUserProfile } from '../../actions/profile';
+import { getCurrentUserProfile, deleteAccount } from '../../actions/profile';
 
-const Dashboard = ({ getCurrentUserProfile, auth: { user }, profile: { profile, loading } }) => {
+const Dashboard = ({ getCurrentUserProfile, deleteAccount, auth: { user }, profile: { profile, loading } }) => {
 	useEffect(() => {
 		getCurrentUserProfile();
 	}, []);
@@ -19,18 +19,22 @@ const Dashboard = ({ getCurrentUserProfile, auth: { user }, profile: { profile, 
 	) : (
 		<Fragment>
 			<h1 className='large text-primary'>Dashboard</h1>
-			<p className='lead'>
+			<h1>
 				<i className='fas fa-user' /> Welcome <strong>{user && user.name}</strong>
+			</h1>
+			<p className='lead'>
+				Email id : <strong>{user.email && user.email}</strong>
 			</p>
+			<br />
 
 			{profile != null ? (
 				<Fragment>
-					<h2 className='my-2'>Education Credentials</h2>
 					<DashboardActions />
+
 					<Experience experience={profile.experience} />
 					<Education education={profile.education} />
 					<div className='my-2'>
-						<button className='btn btn-danger'>
+						<button className='btn btn-danger' onClick={() => deleteAccount()}>
 							<i className='fas fa-user-minus' />
 							Delete My Account
 						</button>
@@ -51,7 +55,8 @@ const Dashboard = ({ getCurrentUserProfile, auth: { user }, profile: { profile, 
 Dashboard.propTypes = {
 	getCurrentUserProfile: PropTypes.func.isRequired,
 	auth: PropTypes.object.isRequired,
-	profile: PropTypes.object.isRequired
+	profile: PropTypes.object.isRequired,
+	deleteAccount: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -59,4 +64,4 @@ const mapStateToProps = (state) => ({
 	profile: state.profile
 });
 
-export default connect(mapStateToProps, { getCurrentUserProfile })(Dashboard);
+export default connect(mapStateToProps, { getCurrentUserProfile, deleteAccount })(Dashboard);
