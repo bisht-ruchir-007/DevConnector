@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 
-const Education = ({ education }) => {
+import { deleteEducation } from '../../actions/profile';
+
+const Education = ({ education, deleteEducation }) => {
 	const educations = education.map((edu) => (
 		<tr key={edu._id}>
 			<td>{edu.school}</td>
@@ -15,7 +17,9 @@ const Education = ({ education }) => {
 				{edu.to === null ? ' Now' : <Moment format='YYYY/MM/DD'>{edu.to}</Moment>}
 			</td>
 			<td>
-				<button className='btn btn-danger'>Delete</button>
+				<button className='btn btn-danger' onClick={() => deleteEducation(edu._id)}>
+					Delete
+				</button>
 			</td>
 		</tr>
 	));
@@ -40,14 +44,15 @@ const Education = ({ education }) => {
 	} else {
 		return (
 			<h3>
-				Its Empty , Please <Link to='/add-education'>add</Link> your experience details.
+				Its Empty , Please <Link to='/add-education'>add</Link> your education details.
 			</h3>
 		);
 	}
 };
 
 Education.propTypes = {
-	education: PropTypes.object.isRequired
+	education: PropTypes.object.isRequired,
+	deleteEducation: PropTypes.func.isRequired
 };
 
-export default connect(null)(Education);
+export default connect(null, { deleteEducation })(Education);
