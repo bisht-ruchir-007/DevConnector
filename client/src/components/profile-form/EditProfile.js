@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createProfile, getCurrentUserProfile } from '../../actions/profile';
@@ -41,7 +41,7 @@ const EditProfile = ({ createProfile, history, getCurrentUserProfile, profile: {
 				instagram: loading || !profile.social ? '' : profile.social.instagram
 			});
 		},
-		[ loading ]
+		[ loading, getCurrentUserProfile ]
 	);
 
 	const {
