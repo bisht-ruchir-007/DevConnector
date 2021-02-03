@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getProfilebyID } from '../../actions/profile';
+import ProfileTop from './ProfileTop';
+import ProfileAbout from './ProfileAbout';
 
 const Profile = ({ match, getProfilebyID, profile: { profile, loading }, auth }) => {
 	useEffect(
@@ -31,66 +33,8 @@ const Profile = ({ match, getProfilebyID, profile: { profile, loading }, auth })
 					)}
 
 					<div class='profile-grid my-1'>
-						<div class='profile-top bg-primary p-2'>
-							<img
-								class='round-img my-1'
-								src='https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200'
-								alt=''
-							/>
-							<h1 class='large'>{profile.user.name}</h1>
-							<p class='lead'>Full Stack Web Developer</p>
-							<p>Delhi, India</p>
-							<div class='icons my-1'>
-								<a href='#' target='_blank' rel='noopener noreferrer'>
-									<i class='fas fa-globe fa-2x' />
-								</a>
-								<a href='#' target='_blank' rel='noopener noreferrer'>
-									<i class='fab fa-twitter fa-2x' />
-								</a>
-								<a href='#' target='_blank' rel='noopener noreferrer'>
-									<i class='fab fa-facebook fa-2x' />
-								</a>
-								<a href='#' target='_blank' rel='noopener noreferrer'>
-									<i class='fab fa-linkedin fa-2x' />
-								</a>
-								<a href='#' target='_blank' rel='noopener noreferrer'>
-									<i class='fab fa-youtube fa-2x' />
-								</a>
-								<a href='#' target='_blank' rel='noopener noreferrer'>
-									<i class='fab fa-instagram fa-2x' />
-								</a>
-							</div>
-						</div>
-
-						<div class='profile-about bg-light p-2'>
-							<h2 class='text-primary'>John's Bio</h2>
-							<p>
-								Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed doloremque nesciunt,
-								repellendus nostrum deleniti recusandae nobis neque modi perspiciatis similique?
-							</p>
-							<div class='line' />
-							<h2 class='text-primary'>Skill Set</h2>
-							<div class='skills'>
-								<div class='p-1'>
-									<i class='fa fa-check' /> HTML
-								</div>
-								<div class='p-1'>
-									<i class='fa fa-check' /> CSS
-								</div>
-								<div class='p-1'>
-									<i class='fa fa-check' /> JavaScript
-								</div>
-								<div class='p-1'>
-									<i class='fa fa-check' /> NodeJS
-								</div>
-								<div class='p-1'>
-									<i class='fa fa-check' /> React
-								</div>
-								<div class='p-1'>
-									<i class='fa fa-check' /> Redux
-								</div>
-							</div>
-						</div>
+						<ProfileTop profile={profile} />
+						<ProfileAbout profile={profile} />
 
 						<div class='profile-exp bg-white p-2'>
 							<h2 class='text-primary'>Experience</h2>
