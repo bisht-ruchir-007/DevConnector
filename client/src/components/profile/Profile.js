@@ -7,6 +7,7 @@ import { getProfilebyID } from '../../actions/profile';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import ProfileExperience from './ProfileExperience';
+import ProfileEducation from './ProfileEducation';
 
 const Profile = ({ match, getProfilebyID, profile: { profile, loading }, auth }) => {
 	useEffect(
@@ -51,21 +52,15 @@ const Profile = ({ match, getProfilebyID, profile: { profile, loading }, auth })
 
 						<div class='profile-edu bg-white p-2'>
 							<h2 class='text-primary'>Education</h2>
-							<div>
-								<h3>MAIT</h3>
-								<p>Sep 2017 - June 2021</p>
-								<p>
-									<strong>Degree: </strong>Bachelor of Technology(BTech)
-								</p>
-								<p>
-									<strong>Field Of Study: </strong>Computer Science
-								</p>
-								<p>
-									<strong>Description: </strong>Lorem ipsum dolor sit amet consectetur adipisicing
-									elit. Dignissimos placeat, dolorum ullam ipsam, sapiente suscipit dicta eius velit
-									amet aspernatur asperiores modi quidem expedita fugit.
-								</p>
-							</div>
+							{profile.education.length > 0 ? (
+								<Fragment>
+									{profile.education.map((education) => (
+										<ProfileEducation key={education._id} education={education} />
+									))}
+								</Fragment>
+							) : (
+								<h4>No education credentials</h4>
+							)}
 						</div>
 
 						<div class='profile-github'>
