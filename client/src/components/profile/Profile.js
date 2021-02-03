@@ -6,6 +6,7 @@ import Spinner from '../layout/Spinner';
 import { getProfilebyID } from '../../actions/profile';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
+import ProfileExperience from './ProfileExperience';
 
 const Profile = ({ match, getProfilebyID, profile: { profile, loading }, auth }) => {
 	useEffect(
@@ -35,33 +36,17 @@ const Profile = ({ match, getProfilebyID, profile: { profile, loading }, auth })
 					<div class='profile-grid my-1'>
 						<ProfileTop profile={profile} />
 						<ProfileAbout profile={profile} />
-
 						<div class='profile-exp bg-white p-2'>
 							<h2 class='text-primary'>Experience</h2>
-							<div>
-								<h3 class='text-dark'>Coding Ninjas</h3>
-								<p>Oct 2018 - May 2019</p>
-								<p>
-									<strong>Position: </strong>Teaching Assistant
-								</p>
-								<p>
-									<strong>Description: </strong>Lorem ipsum dolor sit amet consectetur adipisicing
-									elit. Dignissimos placeat, dolorum ullam ipsam, sapiente suscipit dicta eius velit
-									amet aspernatur asperiores modi quidem expedita fugit.
-								</p>
-							</div>
-							<div>
-								<h3> class="text-dark">Skyquestt Technology and Consultancy</h3>
-								<p>Aug 2020 - Oct 2020</p>
-								<p>
-									<strong>Position: </strong>Web Developer
-								</p>
-								<p>
-									<strong>Description: </strong>Lorem ipsum dolor sit amet consectetur adipisicing
-									elit. Dignissimos placeat, dolorum ullam ipsam, sapiente suscipit dicta eius velit
-									amet aspernatur asperiores modi quidem expedita fugit.
-								</p>
-							</div>
+							{profile.experience.length > 0 ? (
+								<Fragment>
+									{profile.experience.map((experience) => (
+										<ProfileExperience key={experience._id} experience={experience} />
+									))}
+								</Fragment>
+							) : (
+								<h4>No experience credentials</h4>
+							)}
 						</div>
 
 						<div class='profile-edu bg-white p-2'>
