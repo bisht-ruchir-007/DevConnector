@@ -4,7 +4,7 @@ import Moment from 'react-moment';
 const ProfileExperience = ({ experience: { company, title, to, from, description } }) => {
 	return (
 		<div>
-			<h3 class='text-dark'>{company}</h3>
+			<h3 className='text-dark'>{company}</h3>
 			<p>
 				<Moment format='YYYY/MM/DD'>{from}</Moment> - {!to ? 'Now' : <Moment format='YYYY/MM/DD'>{to}</Moment>}
 			</p>
@@ -21,7 +21,7 @@ const ProfileExperience = ({ experience: { company, title, to, from, description
 };
 
 ProfileExperience.propTypes = {
-	experience: PropTypes.array.isRequired
+	experience: PropTypes.object.isRequired
 };
 
 export default ProfileExperience;
