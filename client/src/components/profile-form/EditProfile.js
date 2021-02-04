@@ -63,6 +63,7 @@ const EditProfile = ({ createProfile, history, getCurrentUserProfile, profile: {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
+		formData.skills = skills.toString();
 		createProfile(formData, history, true);
 	};
 
