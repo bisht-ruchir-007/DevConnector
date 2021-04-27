@@ -183,6 +183,8 @@ router.post('/comment/:id', [ auth, [ check('text', 'Please enter a comment').no
 
 		const post = await Post.findById(req.params.id);
 
+		console.log('3');
+
 		const newComment = {
 			text: req.body.text,
 			name: user.name,
