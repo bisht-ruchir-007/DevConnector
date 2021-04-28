@@ -1,6 +1,0 @@
-{
-    "mongoURI" : "mongodb+srv://ruchir123:ruchir123@devconnectorwebapp.udkb2.mongodb.net/DevConnector?retryWrites=true&w=majority",
-    "jwtSecret" : "somelongString",
-    "github_client_id"   : "43a7a77f80b94603b7b7",
-    "github_client_secret" : "8aabde2efac77cd722ef3cec842baa69540ab0f7"
-}
